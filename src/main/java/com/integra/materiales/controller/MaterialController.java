@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.integra.materiales.model.Material;
+import com.integra.materiales.model.ListaEgreso;
 import com.integra.materiales.services.MaterialService;
 
 import java.util.List;
@@ -23,24 +23,24 @@ public class MaterialController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Material>> getAllMaterials() {
+    public ResponseEntity<List<ListaEgreso>> getAllMaterials() {
         return ResponseEntity.ok(materialService.getAllMaterials());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Material> getMaterialById(@PathVariable Long id) {
+    public ResponseEntity<ListaEgreso> getMaterialById(@PathVariable Long id) {
         return materialService.getMaterialById(id)
             .map(entity -> ResponseEntity.ok(entity))
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Material> createMaterial(@RequestBody Material material) {
+    public ResponseEntity<ListaEgreso> createMaterial(@RequestBody ListaEgreso material) {
         return ResponseEntity.ok(materialService.saveMaterial(material));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Material> updateMaterial(@PathVariable Long id, @RequestBody Material material) {
+    public ResponseEntity<ListaEgreso> updateMaterial(@PathVariable Long id, @RequestBody ListaEgreso material) {
         return ResponseEntity.ok(materialService.saveMaterial(material));
     }
 

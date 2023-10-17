@@ -4,7 +4,7 @@ package com.integra.materiales.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.integra.materiales.model.Material;
+import com.integra.materiales.model.ListaEgreso;
 import com.integra.materiales.repository.MaterialRepository;
 
 import java.util.List;
@@ -22,15 +22,15 @@ public class MaterialService {
         this.materialRepository = materialRepository;
     }
 
-    public List<Material> getAllMaterials() {
+    public List<ListaEgreso> getAllMaterials() {
         return materialRepository.findAll();
     }
 
-    public Optional<Material> getMaterialById(Long id) {
+    public Optional<ListaEgreso> getMaterialById(Long id) {
         return materialRepository.findById(id);
     }
 
-    public Material saveMaterial(Material material) {
+    public ListaEgreso saveMaterial(ListaEgreso material) {
         return materialRepository.save(material);
     }
 

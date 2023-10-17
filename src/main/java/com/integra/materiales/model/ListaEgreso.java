@@ -14,11 +14,11 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Material {
+public class ListaEgreso {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @OneToOne
     @JoinColumn(name = "id_mov")  // Nombre de la columna de clave foránea en la tabla EgresoMovimiento
     private EgresoMovimiento egresomovimiento;
@@ -28,4 +28,3 @@ public class Material {
     private ListasCorte listascorte;
 
 }
-            
