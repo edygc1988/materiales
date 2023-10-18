@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListasCorte {
+public class ListaCorte {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MaterialesApplication {
+public class MaterialApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MaterialesApplication.class, args);
+		SpringApplication.run(MaterialApplication.class, args);
 	}
-
 }

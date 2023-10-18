@@ -25,6 +25,6 @@ public class ListaEgreso {
 
     @OneToOne
     @JoinColumn(name = "numero_pedido")  // Nombre de la columna de clave foránea en la tabla ListasCorte
-    private ListasCorte listascorte;
+    private ListaCorte listascorte;
 
 }

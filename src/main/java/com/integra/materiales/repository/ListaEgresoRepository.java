@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.integra.materiales.model.ListaEgreso;
 
-public interface MaterialRepository extends JpaRepository<ListaEgreso, Long> {
+public interface ListaEgresoRepository extends JpaRepository<ListaEgreso, Long> {
 }
