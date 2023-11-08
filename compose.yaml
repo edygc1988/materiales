@@ -1,7 +1,7 @@
 services:
   myapp:
-    #image: myapp-image  # Nombre de la imagen que construiste
-    image: edygc1988/tes_car_2023:myapp-image  # Nombre de la imagen que construiste
+    image: myapp-image  # Nombre de la imagen que construiste
+    #image: edygc1988/tes_car_2023:myapp-image  # Nombre de la imagen que construiste
     ports:
       - '8080:8080'  # Puerto de tu aplicación    
     environment:
@@ -9,8 +9,8 @@ services:
     depends_on:
        - mysql
   mysql:
-    #image: 'mysql:latest'
-    image: 'edygc1988/tes_car_2023:mysql'
+    image: 'mysql:latest'
+    #image: 'edygc1988/tes_car_2023:mysql'
     environment:
       - 'MYSQL_DATABASE=integra'
       - 'MYSQL_PASSWORD=integra'
@@ -22,8 +22,8 @@ services:
       - db_data:/var/lib/mysql
 
   nginx:
-    #image: 'nginx:latest'
-    image: 'edygc1988/tes_car_2023:testing'
+    image: 'nginx:latest'
+    #image: 'edygc1988/tes_car_2023:testing'
     ports:
       - '81:80'
     depends_on:

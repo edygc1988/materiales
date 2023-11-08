@@ -1,8 +1,11 @@
 package com.integra.materiales.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +42,13 @@ public class ListaCorteController {
     }
 
     @PostMapping
-    public ResponseEntity<ListaCorte> createListaCorte(@RequestBody ListaCorte listaCorte) {
-        return ResponseEntity.ok(listaCorteService.saveListaCorte(listaCorte));
+    public ResponseEntity<Map<String, Object>> createListaCorte(@RequestBody ListaCorte listaCorte) {
+        //return ResponseEntity.ok(listaCorteService.saveListaCorte(listaCorte));
+        listaCorteService.saveListaCorte(listaCorte);
+        Map<String, Object> response = new HashMap<>();
+        response.put("resultCode", HttpStatus.CREATED);
+        response.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

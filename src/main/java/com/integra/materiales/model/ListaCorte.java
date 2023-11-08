@@ -15,9 +15,10 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListaCorte {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private Long numero_pedido;
     private String cliente;
     private String simbolo;
@@ -27,8 +28,4 @@ public class ListaCorte {
     private String division;
     private String proceso;
     private Long cantidad_producida_nr;
-    /*
-    @ManyToOne
-    @JoinColumn(name = "material_id")  // Nombre de la columna de clave foránea en la tabla Caja
-    private Material material;*/
 }

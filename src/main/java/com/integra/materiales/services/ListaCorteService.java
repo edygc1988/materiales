@@ -1,5 +1,6 @@
 package com.integra.materiales.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public class ListaCorteService {
 
     public Optional<ListaCorte> getListacorteById(Long id){
         return listaCorteRepository.findById(id);
+    }
+    
+    public Optional<ListaCorte> getListacorteByDate(Date id){
+        return listaCorteRepository.findBy(null, null);
     }
 
     public ListaCorte saveListaCorte(ListaCorte listaCorte){

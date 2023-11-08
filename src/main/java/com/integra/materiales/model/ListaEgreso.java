@@ -1,30 +1,24 @@
 package com.integra.materiales.model;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListaEgreso {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "id_mov")  // Nombre de la columna de clave foránea en la tabla EgresoMovimiento
-    private EgresoMovimiento egresomovimiento;
-
-    @OneToOne
-    @JoinColumn(name = "numero_pedido")  // Nombre de la columna de clave foránea en la tabla ListasCorte
-    private ListaCorte listascorte;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Agregar una clave primaria, puede ser cualquier campo adecuado.
+    
+    private Long id_mov;
+    private Long numero_pedido;
+    private Long lista_corte;
+    private String identif_bobina ;
 
 }
