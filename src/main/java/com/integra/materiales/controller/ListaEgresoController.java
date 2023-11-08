@@ -21,17 +21,24 @@ public class ListaEgresoController {
     private final ListaEgresoService listaegresoService;
 
     // Use constructor-based dependency injection
+// The `@Autowired` annotation is used to automatically wire the `ListaEgresoService` bean into the
+// `ListaEgresoController` class.
     @Autowired
     public ListaEgresoController(ListaEgresoService listaegresoService) {
         this.listaegresoService = listaegresoService;
     }
 
     @GetMapping
+    // The method `getAlllistaEgresos()` is a GET request handler that retrieves all the `ListaEgreso`
+    // objects from the database. It returns a `ResponseEntity` object with a list of `ListaEgreso`
+    // objects in the response body and an HTTP status code of 200 (OK).
     public ResponseEntity<List<ListaEgreso>> getAlllistaEgresos() {
         return ResponseEntity.ok(listaegresoService.getAllListaEgresos());
     }
 
     @GetMapping("/{id}")
+    // The method `getlistaEgresoById` is a GET request handler that retrieves a `ListaEgreso` object
+    // from the database based on the provided `id`.
     public ResponseEntity<ListaEgreso> getlistaEgresoById(@PathVariable Long id) {
         return listaegresoService.getListaEgresoById(id)
             .map(entity -> ResponseEntity.ok(entity))
@@ -39,6 +46,9 @@ public class ListaEgresoController {
     }
 
     @PostMapping
+    // The method `createlistaEgreso` is a POST request handler that creates a new `ListaEgreso` object
+    // in the database. It takes a `ListaEgreso` object as a request body and saves it using the
+    // `listaegresoService.saveListaEgreso()` method.
     public ResponseEntity<Map<String, Object>> createlistaEgreso(@RequestBody ListaEgreso listaEgreso) {
         //return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));       
         listaegresoService.saveListaEgreso(listaEgreso);
@@ -49,17 +59,26 @@ public class ListaEgresoController {
     }
 
     @PutMapping("/{id}")
+    // The method `updatelistaEgreso` is a PUT request handler that updates an existing `ListaEgreso`
+    // object in the database. It takes two parameters: `id` and `listaEgreso`.
     public ResponseEntity<ListaEgreso> updatelistaEgreso(@PathVariable Long id, @RequestBody ListaEgreso listaEgreso) {
         return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));
     }
 
     @DeleteMapping("/{id}")
+    // The method `deletelistaEgreso` is a DELETE request handler that deletes a `ListaEgreso` object
+    // from the database based on the provided `id`. It takes the `id` as a path variable and calls the
+    // `listaegresoService.deleteListaEgreso(id)` method to delete the object. It returns a
+    // `ResponseEntity` object with an HTTP status code of 204 (No Content) to indicate that the
+    // deletion was successful.
     public ResponseEntity<Void> deletelistaEgreso(@PathVariable Long id) {
         listaegresoService.deleteListaEgreso(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/datosPorNumeroPedido")
+    // The method `getDatosPorNumeroPedido` is a GET request handler that retrieves a list of
+    // `DatosPorNumeroPedido` objects from the database based on the provided `numeroPedido` parameter.
     public List<DatosPorNumeroPedido> getDatosPorNumeroPedido(@RequestParam("numeroPedido") Long numeroPedido) {
         List<DatosPorNumeroPedido> result = listaegresoService.getDatosPorNumeroPedido(numeroPedido);
         return result;

@@ -1,4 +1,10 @@
 services:
+  flutter-web:
+    image: flutter-web-app
+    ports:
+      - '90:80'
+    depends_on:
+      - myapi
   myapi:
     image: myapi-image  # Nombre de la imagen que construiste
     #image: edygc1988/tes_car_2023:myapi-image  # Nombre de la imagen que construiste
@@ -22,7 +28,7 @@ services:
       - db_data:/var/lib/mysql
 
   nginx:
-    image: 'nginx:latest'
+    image: 'nginx:stable-alpine'
     #image: 'edygc1988/tes_car_2023:testing'
     ports:
       - '81:80'

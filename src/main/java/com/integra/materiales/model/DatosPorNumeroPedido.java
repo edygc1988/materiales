@@ -1,3 +1,7 @@
+/**
+ * The class "DatosPorNumeroPedido" is a model class in Java that represents data related to a specific
+ * order number.
+ */
 package com.integra.materiales.model;
 
 import java.sql.Date;

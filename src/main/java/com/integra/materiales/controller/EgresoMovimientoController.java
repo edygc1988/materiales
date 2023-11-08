@@ -24,17 +24,24 @@ import com.integra.materiales.services.EgresoMovimientoService;
 public class EgresoMovimientoController {
     private final EgresoMovimientoService egresoMovimientoService;
 
+// The `@Autowired` annotation is used to automatically wire the `EgresoMovimientoService` bean into
+// the `EgresoMovimientoController` class.
     @Autowired
     public EgresoMovimientoController(EgresoMovimientoService egresoMovimientoService) {
         this.egresoMovimientoService = egresoMovimientoService;
     }
 
     @GetMapping
+    // The method `getAllListaCorte()` is a GET request handler that returns a `ResponseEntity`
+    // containing a list of `EgresoMovimiento` objects. This method is used to retrieve all the
+    // `EgresoMovimiento` objects from the database and return them as a response.
     public ResponseEntity<List<EgresoMovimiento>> getAllListaCorte(){
         return ResponseEntity.ok(egresoMovimientoService.getALlEgresoMov());
     }
 
     @GetMapping("/{id}")
+    // The method `getEgresoMovimientoById` is a GET request handler that retrieves an
+    // `EgresoMovimiento` object from the database based on the provided `id`.
     public ResponseEntity<EgresoMovimiento> getEgresoMovimientoById(@PathVariable Long id) {
         return egresoMovimientoService.getEgresoMovimientoById(id)
             .map(entity -> ResponseEntity.ok(entity))
@@ -42,9 +49,14 @@ public class EgresoMovimientoController {
     }
 
     @PostMapping
+    // The method `createEgresoMovimiento` is a POST request handler that creates a new
+    // `EgresoMovimiento` object in the database. It takes in an `EgresoMovimiento` object as a request
+    // body and returns a `ResponseEntity` containing a `Map` object with the result code and status.
     public ResponseEntity<Map<String, Object>> createEgresoMovimiento(@RequestBody EgresoMovimiento egresoMovimiento) {
         //return ResponseEntity.ok(egresoMovimientoService.saveEgresoMovimiento(egresoMovimiento));
         egresoMovimientoService.saveEgresoMovimiento(egresoMovimiento);
+        // The line `Map<String, Object> response = new HashMap<>();` is creating a new instance of the
+        // `HashMap` class and assigning it to the variable `response`.
         Map<String, Object> response = new HashMap<>();
         response.put("resultCode", HttpStatus.CREATED);
         response.put("status", HttpStatus.OK);
@@ -52,11 +64,20 @@ public class EgresoMovimientoController {
     }
 
     @PutMapping("/{id}")
+    // The method `updateListaCorte` is a PUT request handler that updates an existing
+    // `EgresoMovimiento` object in the database. It takes in two parameters: `id` and
+    // `egresoMovimiento`.
     public ResponseEntity<EgresoMovimiento> updateListaCorte(@PathVariable Long id, @RequestBody EgresoMovimiento egresoMovimiento) {
         return ResponseEntity.ok(egresoMovimientoService.saveEgresoMovimiento(egresoMovimiento));
     }
 
     @DeleteMapping("/{id}")
+    // The method `deleteEgresoMovimiento` is a DELETE request handler that deletes an
+    // `EgresoMovimiento` object from the database based on the provided `id`. It takes in the `id` as
+    // a path variable and returns a `ResponseEntity` with a `Void` response body. The `ResponseEntity`
+    // is used to indicate the success or failure of the delete operation. In this case, it returns a
+    // `204 No Content` status code to indicate that the delete operation was successful and there is
+    // no content to return in the response body.
     public ResponseEntity<Void> deleteEgresoMovimiento(@PathVariable Long id) {
         egresoMovimientoService.deleteEgreso(id);
         return ResponseEntity.noContent().build();
