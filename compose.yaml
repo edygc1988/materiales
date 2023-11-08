@@ -1,7 +1,7 @@
 services:
-  myapp:
-    image: myapp-image  # Nombre de la imagen que construiste
-    #image: edygc1988/tes_car_2023:myapp-image  # Nombre de la imagen que construiste
+  myapi:
+    image: myapi-image  # Nombre de la imagen que construiste
+    #image: edygc1988/tes_car_2023:myapi-image  # Nombre de la imagen que construiste
     ports:
       - '8080:8080'  # Puerto de tu aplicación    
     environment:
@@ -27,7 +27,7 @@ services:
     ports:
       - '81:80'
     depends_on:
-      - myapp
+      - myapi
     volumes:
       - ./nginx-config:/etc/nginx/conf.d # Aquí debes proporcionar la configuración de Nginx
 
