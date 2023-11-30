@@ -7,7 +7,6 @@ services:
       - myapi
   myapi:
     image: myapi-image  # Nombre de la imagen que construiste
-    #image: edygc1988/tes_car_2023:myapi-image  # Nombre de la imagen que construiste
     ports:
       - '8080:8080'  # Puerto de tu aplicación    
     environment:
@@ -16,11 +15,10 @@ services:
        - mysql
   mysql:
     image: 'mysql:latest'
-    #image: 'edygc1988/tes_car_2023:mysql'
     environment:
       - 'MYSQL_DATABASE=integra'
-      - 'MYSQL_PASSWORD=integra'
-      - 'MYSQL_ROOT_PASSWORD=integra'
+      - 'MYSQL_PASSWORD=*Integra_2023'
+      - 'MYSQL_ROOT_PASSWORD=*Integra_2023'
       - 'MYSQL_USER=integra'
     ports:
       - '3306:3306'
@@ -28,8 +26,7 @@ services:
       - db_data:/var/lib/mysql
 
   nginx:
-    image: 'nginx:stable-alpine'
-    #image: 'edygc1988/tes_car_2023:testing'
+    image: 'nginx:1.25-alpine-slim'
     ports:
       - '81:80'
     depends_on:

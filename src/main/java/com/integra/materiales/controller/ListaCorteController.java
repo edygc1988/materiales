@@ -20,7 +20,7 @@ import com.integra.materiales.model.ListaCorte;
 import com.integra.materiales.services.ListaCorteService;
 
 @RestController
-@RequestMapping("/api/listacorte")
+@RequestMapping("/api/v1/listacorte")
 public class ListaCorteController {
     private final ListaCorteService listaCorteService;
 
@@ -57,7 +57,15 @@ public class ListaCorteController {
     // `resultCode` and a `status` field, which indicate the success or failure of the operation. The
     // HTTP status code returned is `HttpStatus.OK` (200) if the operation is successful.
     public ResponseEntity<Map<String, Object>> createListaCorte(@RequestBody ListaCorte listaCorte) {
-        //return ResponseEntity.ok(listaCorteService.saveListaCorte(listaCorte));
+        
+        if (listaCorteService.existeListaCorte(listaCorte)) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("resultCode", HttpStatus.BAD_REQUEST);
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("message", "Ya existe un registro con los mismos valores");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
         listaCorteService.saveListaCorte(listaCorte);
         Map<String, Object> response = new HashMap<>();
         response.put("resultCode", HttpStatus.CREATED);

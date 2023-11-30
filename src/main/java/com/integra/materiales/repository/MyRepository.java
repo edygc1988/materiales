@@ -21,11 +21,18 @@ public interface MyRepository extends JpaRepository<ListaCorte, Long> {
  * @return The method is returning a List of Object arrays. Each array contains two elements: the first
  * element is of type ListaCorte and the second element is of type EgresoMovimiento.
  */
-    @Query("SELECT lc, em " +
+    /*@Query("SELECT lc, em " +
            "FROM ListaEgreso le " +
-           "JOIN EgresoMovimiento em ON le.id_mov = em.id_mov and le.identif_bobina = em.identif_bobina " +
-           "JOIN ListaCorte lc ON le.lista_corte = lc.lista_corte " +
-           "WHERE lc.numero_pedido = :numeroPedido OR le.lista_corte = :numeroPedido")
+           "JOIN EgresoMovimiento em " + //ON le.idMov = em.idMov and le.identifBobina = em.identifBobina " +
+           "JOIN ListaCorte lc ON le.listaCorte = lc.listaCorte " +
+           "WHERE lc.numeroPedido = :numeroPedido OR le.listaCorte = :numeroPedido")
     List<Object[]> findDatosPorNumeroPedido(
-        @Param("numeroPedido") Long numeroPedido);
+        @Param("numeroPedido") Long numeroPedido);*/
+        @Query("SELECT lc, em " +
+       "FROM ListaCorte lc " +
+       "JOIN ListaEgreso le ON lc.listaCorte = le.listaCorte " +
+       "JOIN le.egresoMovimiento em " +
+       "WHERE lc.numeroPedido = :numeroPedido OR le.listaCorte = :numeroPedido")
+       List<Object[]> findDatosPorNumeroPedido(@Param("numeroPedido") Long numeroPedido);
+
 }

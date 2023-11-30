@@ -32,7 +32,7 @@ public class EgresoMovimientoService {
      * 
      * @return A List of EgresoMovimiento objects is being returned.
      */
-    public List<EgresoMovimiento> getALlEgresoMov(){
+    public List<EgresoMovimiento> getAllEgresoMov(){
         return egresoMovimientoRepository.findAll();
     }
     
@@ -46,6 +46,10 @@ public class EgresoMovimientoService {
      */
     public Optional<EgresoMovimiento> getEgresoMovimientoById(Long id){
         return egresoMovimientoRepository.findById(id);
+    }
+
+    public List<EgresoMovimiento> getEgresoMovimientoByNroFisico(Long nroFisico){
+        return egresoMovimientoRepository.findByNroFisico(nroFisico);
     }
 
     /*public EgresoMovimiento findEgresoMovimientoForListaCorte(ListaCorte listaCorte) {

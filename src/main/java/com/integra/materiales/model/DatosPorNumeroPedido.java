@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class DatosPorNumeroPedido {
     /* Campos tabla Movimiento */
     private Long idMov;
-    private String nroFisico;
+    private Long nroFisico;
     private String tipoDocumento;
     private Date fecha;
     private Long idBodega;
@@ -40,7 +40,7 @@ public class DatosPorNumeroPedido {
     private Long cantidadProducidaNr;
 
     public DatosPorNumeroPedido(Long idMov,
-            String nroFisico,
+            Long nroFisico,
             String tipoDocumento,
             Date fecha,
             Long idBodega,
@@ -100,11 +100,11 @@ public class DatosPorNumeroPedido {
         this.idMov = idMov;
     }
 
-    public String getNroFisico() {
+    public Long getNroFisico() {
         return nroFisico;
     }
 
-    public void setNroFisico(String nroFisico) {
+    public void setNroFisico(Long nroFisico) {
         this.nroFisico = nroFisico;
     }
 

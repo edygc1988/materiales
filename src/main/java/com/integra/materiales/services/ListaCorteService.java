@@ -78,4 +78,13 @@ public class ListaCorteService {
     public void deleteListaCorte(Long id){
         listaCorteRepository.deleteById(id);
     }
+
+    public boolean existeListaCorte(ListaCorte listaCorte) {
+        Long numeroPedido = listaCorte.getNumeroPedido();
+        Long listaCorteId = listaCorte.getListaCorte();
+        Long cantidadProducidaNr = listaCorte.getCantidadProducidaNr();
+
+        return listaCorteRepository.existsByNumeroPedidoAndListaCorteAndCantidadProducidaNr(
+                numeroPedido, listaCorteId, cantidadProducidaNr);
+    }
 }

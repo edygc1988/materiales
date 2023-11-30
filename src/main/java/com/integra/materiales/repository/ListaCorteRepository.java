@@ -7,5 +7,8 @@ import com.integra.materiales.model.ListaCorte;
 // The line `public interface ListaCorteRepository extends JpaRepository<ListaCorte, Long> {` is
 // declaring an interface named `ListaCorteRepository` that extends the `JpaRepository` interface.
 public interface ListaCorteRepository extends JpaRepository<ListaCorte, Long> {
-    
+
+    boolean existsByNumeroPedidoAndListaCorteAndCantidadProducidaNr(
+            Long numeroPedido, Long listaCorte, Long cantidadProducidaNr);
 }
+

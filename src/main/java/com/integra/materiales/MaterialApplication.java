@@ -3,7 +3,13 @@ package com.integra.materiales;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
+import com.integra.materiales.config.RsaKeyProperties;
+
+@Configuration
+@EnableConfigurationProperties(RsaKeyProperties.class)
 // The `@SpringBootApplication` annotation is a convenience annotation that combines three commonly
 // used annotations in Spring Boot applications: `@Configuration`, `@EnableAutoConfiguration`, and
 // `@ComponentScan`.

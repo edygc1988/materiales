@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/listaegreso")
+@RequestMapping("/api/v1/listaegreso")
 public class ListaEgresoController {
 
     // Declare the service as final to ensure its immutability
@@ -45,12 +45,31 @@ public class ListaEgresoController {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    /*@GetMapping("/bobina/{idLote}")
+    // The method `getlistaEgresoById` is a GET request handler that retrieves a `ListaEgreso` object
+    // from the database based on the provided `id`.
+    public ResponseEntity<ListaEgreso> getlistaEgresoByIdLote(@PathVariable Long idLote) {
+        return listaegresoService.getListaEgresoByIdLote(idLote)
+            .map(entity -> ResponseEntity.ok(entity))
+            .orElse(ResponseEntity.notFound().build());
+    }*/
+
     @PostMapping
     // The method `createlistaEgreso` is a POST request handler that creates a new `ListaEgreso` object
     // in the database. It takes a `ListaEgreso` object as a request body and saves it using the
     // `listaegresoService.saveListaEgreso()` method.
-    public ResponseEntity<Map<String, Object>> createlistaEgreso(@RequestBody ListaEgreso listaEgreso) {
-        //return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));       
+    public ResponseEntity<Map<String, Object>> createlistaEgreso(@RequestBody Map<String, Object> request) {
+        // Obtener los valores del mapa
+        Long listaCorte = ((Number) request.get("listaCorte")).longValue();
+        String identifBobina = (String) request.get("identifBobina");
+        Map<String, Object> egresoMovimientoMap = (Map<String, Object>) request.get("egresoMovimiento");
+
+        // Crear una instancia de ListaEgreso utilizando la deserialización personalizada
+        ListaEgreso listaEgreso = new ListaEgreso((long) 0, listaCorte, identifBobina, egresoMovimientoMap);
+
+        // Imprimir información para verificar
+        System.out.println("Received JSON: " + listaEgreso.toString());
+
         listaegresoService.saveListaEgreso(listaEgreso);
         Map<String, Object> response = new HashMap<>();
         response.put("resultCode", HttpStatus.CREATED);
@@ -61,8 +80,24 @@ public class ListaEgresoController {
     @PutMapping("/{id}")
     // The method `updatelistaEgreso` is a PUT request handler that updates an existing `ListaEgreso`
     // object in the database. It takes two parameters: `id` and `listaEgreso`.
-    public ResponseEntity<ListaEgreso> updatelistaEgreso(@PathVariable Long id, @RequestBody ListaEgreso listaEgreso) {
-        return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));
+    public ResponseEntity<Map<String, Object>> updatelistaEgreso(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        // Obtener los valores del mapa
+        Long listaCorte = ((Number) request.get("listaCorte")).longValue();
+        String identifBobina = (String) request.get("identifBobina");
+        Map<String, Object> egresoMovimientoMap = (Map<String, Object>) request.get("egresoMovimiento");
+
+        // Crear una instancia de ListaEgreso utilizando la deserialización personalizada
+        ListaEgreso listaEgreso = new ListaEgreso(id, listaCorte, identifBobina, egresoMovimientoMap);
+
+        // Imprimir información para verificar
+        System.out.println("Received JSON: " + listaEgreso.toString());
+
+        //return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));
+        listaegresoService.saveListaEgreso(listaEgreso);
+        Map<String, Object> response = new HashMap<>();
+        response.put("resultCode", HttpStatus.CREATED);
+        response.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

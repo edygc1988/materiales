@@ -19,13 +19,13 @@ public class ListaCorte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Long numero_pedido;
+    private Long numeroPedido;
     private String cliente;
     private String simbolo;
-    private String tipo_parte;
-    private Date fecha_ini_produccion;
-    private Long lista_corte;
+    private String tipoParte;
+    private Date fechaIniProduccion;
+    private Long listaCorte;
     private String division;
     private String proceso;
-    private Long cantidad_producida_nr;
+    private Long cantidadProducidaNr;
 }

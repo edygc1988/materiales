@@ -8,6 +8,7 @@ import com.integra.materiales.model.DatosPorNumeroPedido;
 import com.integra.materiales.model.EgresoMovimiento;
 import com.integra.materiales.model.ListaCorte;
 import com.integra.materiales.model.ListaEgreso;
+import com.integra.materiales.repository.EgresoMovimientoRepository;
 import com.integra.materiales.repository.ListaEgresoRepository;
 import com.integra.materiales.repository.MyRepository;
 
@@ -30,16 +31,17 @@ public class ListaEgresoService {
     // a custom query defined in the `MyRepository` interface. It is typically used to perform custom
     // database operations that are not provided by the default methods in the `ListaEgresoRepository`.
     private final MyRepository myRepository;
+    private final EgresoMovimientoRepository egresoMovimientoRepository;
 
     // Use constructor-based dependency injection
 // The `@Autowired` annotation is used to automatically wire (inject) the dependencies of a Spring
 // bean. In this case, the `ListaEgresoService` class has two dependencies: `ListaEgresoRepository` and
 // `MyRepository`.
     @Autowired
-    public ListaEgresoService(ListaEgresoRepository listaegresoRepository, MyRepository myRepository) {
+    public ListaEgresoService(ListaEgresoRepository listaegresoRepository, MyRepository myRepository, EgresoMovimientoRepository egresoMovimientoRepository) {
         this.listaegresoRepository = listaegresoRepository;
         this.myRepository = myRepository;
-
+        this.egresoMovimientoRepository = egresoMovimientoRepository;
     }
 
     /**
@@ -62,14 +64,20 @@ public class ListaEgresoService {
         return listaegresoRepository.findById(id);
     }
 
+    /*public Optional<ListaEgreso> getListaEgresoByIdLote(Long idLote) {
+        return listaegresoRepository.findByIdLote(idLote);
+    }*/
+
     /**
      * The function saves a ListaEgreso object to the repository.
      * 
      * @param ListaEgreso The parameter "ListaEgreso" is an object of type "ListaEgreso".
      * @return The method is returning a saved instance of the ListaEgreso object.
      */
-    public ListaEgreso saveListaEgreso(ListaEgreso ListaEgreso) {
-        return listaegresoRepository.save(ListaEgreso);
+    public ListaEgreso saveListaEgreso(ListaEgreso listaEgreso) {
+        EgresoMovimiento egresoMovimiento = egresoMovimientoRepository.findByIdMovAndIdLote(listaEgreso.getEgresoMovimiento().getIdMov(), listaEgreso.getEgresoMovimiento().getIdLote());
+        listaEgreso.setEgresoMovimiento(egresoMovimiento);
+        return listaegresoRepository.save(listaEgreso);
     }
 
     /**
@@ -97,31 +105,31 @@ public class ListaEgresoService {
             ListaCorte lc = (ListaCorte) result[0];
             EgresoMovimiento em = (EgresoMovimiento) result[1];
             DatosPorNumeroPedido datos = new DatosPorNumeroPedido(
-                em.getId_mov(),
-                em.getNro_fisico(),
-                em.getTipo_documento(),
+                em.getIdMov(),
+                em.getNroFisico(),
+                em.getTipoDocumento(),
                 em.getFecha(),
-                em.getId_bodega(),
+                em.getIdBodega(),
                 em.getBodega(),
                 em.getProducto(),
-                em.getId_lote(),
-                em.getIdentif_bobina(),
+                em.getIdLote(),
+                em.getIdentifBobina(),
                 em.getTarjeta(),
                 em.getPeso(),
-                em.getId_proveedor_fk(),
+                em.getIdProveedorFk(),
                 em.getOrigen(),
                 em.getDivision(),
-                em.getEs_fsc(),
-                em.getPorc_fsc(),
-                em.getTipo_fsc(),
-                lc.getNumero_pedido(),
+                em.getEsFsc(),
+                em.getPorcFsc(),
+                em.getTipoFsc(),
+                lc.getNumeroPedido(),
                 lc.getCliente(),
                 lc.getSimbolo(),
-                lc.getTipo_parte(),
-                lc.getFecha_ini_produccion(),
-                lc.getLista_corte(),
+                lc.getTipoParte(),
+                lc.getFechaIniProduccion(),
+                lc.getListaCorte(),
                 lc.getProceso(),
-                lc.getCantidad_producida_nr()
+                lc.getCantidadProducidaNr()
             );
             datosList.add(datos);
         }
