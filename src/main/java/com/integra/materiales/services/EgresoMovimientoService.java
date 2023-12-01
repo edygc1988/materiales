@@ -3,12 +3,10 @@ package com.integra.materiales.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.integra.materiales.model.EgresoMovimiento;
 import com.integra.materiales.repository.EgresoMovimientoRepository;
-import com.integra.materiales.repository.MyRepository;
 
 @Service
 public class EgresoMovimientoService {
@@ -21,8 +19,7 @@ public class EgresoMovimientoService {
 // The `@Autowired` annotation is used to automatically wire the dependencies of a Spring bean. In this
 // case, it is used to inject the `EgresoMovimientoRepository` and `MyRepository` dependencies into the
 // `EgresoMovimientoService` constructor.
-    @Autowired
-    public EgresoMovimientoService(EgresoMovimientoRepository egresoMovimientoRepository, MyRepository myRepository) {
+    public EgresoMovimientoService(EgresoMovimientoRepository egresoMovimientoRepository) {
         this.egresoMovimientoRepository = egresoMovimientoRepository;
     }
     
@@ -51,12 +48,6 @@ public class EgresoMovimientoService {
     public List<EgresoMovimiento> getEgresoMovimientoByNroFisico(Long nroFisico){
         return egresoMovimientoRepository.findByNroFisico(nroFisico);
     }
-
-    /*public EgresoMovimiento findEgresoMovimientoForListaCorte(ListaCorte listaCorte) {
-        // Utiliza la relación entre ListaCorte y EgresoMovimiento a través de ListaEgreso
-        // para encontrar el EgresoMovimiento correspondiente
-        return myRepository.findEgresoMovimientoByListaCorte(listaCorte);
-    }*/
 
     /**
      * The function saves an EgresoMovimiento object in the repository and returns the saved object.

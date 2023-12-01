@@ -1,6 +1,5 @@
 package com.integra.materiales.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,6 @@ public class ListaEgresoController {
     // Use constructor-based dependency injection
 // The `@Autowired` annotation is used to automatically wire the `ListaEgresoService` bean into the
 // `ListaEgresoController` class.
-    @Autowired
     public ListaEgresoController(ListaEgresoService listaegresoService) {
         this.listaegresoService = listaegresoService;
     }
@@ -45,15 +43,6 @@ public class ListaEgresoController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    /*@GetMapping("/bobina/{idLote}")
-    // The method `getlistaEgresoById` is a GET request handler that retrieves a `ListaEgreso` object
-    // from the database based on the provided `id`.
-    public ResponseEntity<ListaEgreso> getlistaEgresoByIdLote(@PathVariable Long idLote) {
-        return listaegresoService.getListaEgresoByIdLote(idLote)
-            .map(entity -> ResponseEntity.ok(entity))
-            .orElse(ResponseEntity.notFound().build());
-    }*/
-
     @PostMapping
     // The method `createlistaEgreso` is a POST request handler that creates a new `ListaEgreso` object
     // in the database. It takes a `ListaEgreso` object as a request body and saves it using the
@@ -66,9 +55,6 @@ public class ListaEgresoController {
 
         // Crear una instancia de ListaEgreso utilizando la deserialización personalizada
         ListaEgreso listaEgreso = new ListaEgreso((long) 0, listaCorte, identifBobina, egresoMovimientoMap);
-
-        // Imprimir información para verificar
-        System.out.println("Received JSON: " + listaEgreso.toString());
 
         listaegresoService.saveListaEgreso(listaEgreso);
         Map<String, Object> response = new HashMap<>();
@@ -89,10 +75,6 @@ public class ListaEgresoController {
         // Crear una instancia de ListaEgreso utilizando la deserialización personalizada
         ListaEgreso listaEgreso = new ListaEgreso(id, listaCorte, identifBobina, egresoMovimientoMap);
 
-        // Imprimir información para verificar
-        System.out.println("Received JSON: " + listaEgreso.toString());
-
-        //return ResponseEntity.ok(listaegresoService.saveListaEgreso(listaEgreso));
         listaegresoService.saveListaEgreso(listaEgreso);
         Map<String, Object> response = new HashMap<>();
         response.put("resultCode", HttpStatus.CREATED);
@@ -115,7 +97,6 @@ public class ListaEgresoController {
     // The method `getDatosPorNumeroPedido` is a GET request handler that retrieves a list of
     // `DatosPorNumeroPedido` objects from the database based on the provided `numeroPedido` parameter.
     public List<DatosPorNumeroPedido> getDatosPorNumeroPedido(@RequestParam("numeroPedido") Long numeroPedido) {
-        List<DatosPorNumeroPedido> result = listaegresoService.getDatosPorNumeroPedido(numeroPedido);
-        return result;
+        return listaegresoService.getDatosPorNumeroPedido(numeroPedido);
     }
 }

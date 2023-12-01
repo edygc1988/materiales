@@ -1,7 +1,10 @@
 package com.integra.materiales.services;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.integra.materiales.model.DatosPorNumeroPedido;
@@ -11,10 +14,6 @@ import com.integra.materiales.model.ListaEgreso;
 import com.integra.materiales.repository.EgresoMovimientoRepository;
 import com.integra.materiales.repository.ListaEgresoRepository;
 import com.integra.materiales.repository.MyRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ListaEgresoService {
@@ -37,7 +36,6 @@ public class ListaEgresoService {
 // The `@Autowired` annotation is used to automatically wire (inject) the dependencies of a Spring
 // bean. In this case, the `ListaEgresoService` class has two dependencies: `ListaEgresoRepository` and
 // `MyRepository`.
-    @Autowired
     public ListaEgresoService(ListaEgresoRepository listaegresoRepository, MyRepository myRepository, EgresoMovimientoRepository egresoMovimientoRepository) {
         this.listaegresoRepository = listaegresoRepository;
         this.myRepository = myRepository;
@@ -63,10 +61,6 @@ public class ListaEgresoService {
     public Optional<ListaEgreso> getListaEgresoById(Long id) {
         return listaegresoRepository.findById(id);
     }
-
-    /*public Optional<ListaEgreso> getListaEgresoByIdLote(Long idLote) {
-        return listaegresoRepository.findByIdLote(idLote);
-    }*/
 
     /**
      * The function saves a ListaEgreso object to the repository.

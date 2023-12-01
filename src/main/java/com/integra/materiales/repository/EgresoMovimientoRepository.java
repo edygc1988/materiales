@@ -14,15 +14,4 @@ public interface EgresoMovimientoRepository extends JpaRepository<EgresoMovimien
 
     EgresoMovimiento findByIdMovAndIdLote(Long idMov, Long idLote);
 
-    /*@Query("SELECT em, le FROM EgresoMovimiento em " + 
-        "LEFT JOIN em.listaEgresos le " +
-        "WHERE em.nroFisico = :nro_fisico")
-    List<Object[]> findByNroFisico(@Param("nro_fisico") Long nro_fisico);*/
-
-    /* 
-    @Query("SELECT le, em FROM EgresoMovimiento em " + 
-    "JOIN em.listaEgresos le " +
-    "WHERE em.nroFisico = :nro_fisico")
-    List<Object> findByNroFisico(@Param("nro_fisico") Long nro_fisico);*/
-
 }

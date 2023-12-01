@@ -1,10 +1,8 @@
 package com.integra.materiales.services;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.integra.materiales.model.ListaCorte;
@@ -22,7 +20,6 @@ public class ListaCorteService {
 
 // The `@Autowired` annotation is used to automatically wire (inject) the dependency of
 // `ListaCorteRepository` into the `listaCorteRepository` variable in the `ListaCorteService` class.
-    @Autowired
     public ListaCorteService(ListaCorteRepository listaCorteRepository) {
         this.listaCorteRepository = listaCorteRepository;
     }
@@ -47,17 +44,6 @@ public class ListaCorteService {
         return listaCorteRepository.findById(id);
     }
     
-    /**
-     * The function returns an optional list of "ListaCorte" objects based on a given date.
-     * 
-     * @param id The parameter "id" is of type Date and represents the date for which you want to
-     * retrieve the list of "ListaCorte" objects.
-     * @return The method is returning an Optional object that contains a List of ListaCorte objects.
-     */
-    public Optional<ListaCorte> getListacorteByDate(Date id){
-        return listaCorteRepository.findBy(null, null);
-    }
-
     /**
      * The function saves a ListaCorte object in the repository.
      * 

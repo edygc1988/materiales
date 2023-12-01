@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +28,6 @@ public class EgresoMovimientoController {
     // The `@Autowired` annotation is used to automatically wire the
     // `EgresoMovimientoService` bean into
     // the `EgresoMovimientoController` class.
-    @Autowired
     public EgresoMovimientoController(EgresoMovimientoService egresoMovimientoService) {
         this.egresoMovimientoService = egresoMovimientoService;
     }
@@ -50,7 +48,6 @@ public class EgresoMovimientoController {
         customResponse.setItems(listaEgresos);
 
         return ResponseEntity.ok(customResponse);
-        // return ResponseEntity.ok(egresoMovimientoService.getAllEgresoMov());
     }
 
     @GetMapping("/{id}")
@@ -91,8 +88,7 @@ public class EgresoMovimientoController {
     // body and returns a `ResponseEntity` containing a `Map` object with the result
     // code and status.
     public ResponseEntity<Map<String, Object>> createEgresoMovimiento(@RequestBody EgresoMovimiento egresoMovimiento) {
-        // return
-        // ResponseEntity.ok(egresoMovimientoService.saveEgresoMovimiento(egresoMovimiento));
+
         egresoMovimientoService.saveEgresoMovimiento(egresoMovimiento);
         // The line `Map<String, Object> response = new HashMap<>();` is creating a new
         // instance of the
